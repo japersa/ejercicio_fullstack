@@ -27,7 +27,7 @@ services:
     build: ./Backend
     container_name: backend
     ports:
-      - "5000:8080"
+      - "8080:8080"
     depends_on:
       db:
         condition: service_healthy
@@ -39,12 +39,13 @@ services:
       - my_network
 
   frontend:
-    build: ./Frontend
+    build:
+      context: ./Frontend
+      args:
+        - VITE_BACKEND_URL=http://backend:8080
     container_name: frontend
     ports:
       - "3000:3000"
-    environment:
-      BACKEND_URL: "http://backend:8080"
     depends_on:
       - backend
     networks:

@@ -1,12 +1,13 @@
 import { API_URL } from "../constants/api"; // URL del backend
 import { UserRecord } from "../interfaces/UserRecord"; // Interfaz para tipado de datos
 
+
 export const registerUser = async (user: UserRecord) => {
   try {
     console.log('Attempting to register user:', { ...user, password: '[HIDDEN]' });
     console.log('API URL:', `${API_URL}/api/usuarios`);
     
-    const response = await fetch(`http://backend:5207/api/usuarios`, {
+    const response = await fetch(`${API_URL}/api/usuarios`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
